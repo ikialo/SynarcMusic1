@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SYNARC MUSIC</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">LOGIN</string>
+</resources>

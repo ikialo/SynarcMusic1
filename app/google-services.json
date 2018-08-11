@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "476786347455",
+    "firebase_url": "https://synarc-music.firebaseio.com",
+    "project_id": "synarc-music",
+    "storage_bucket": "synarc-music.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476786347455:android:09869e8b92a14ed7",
+        "android_client_info": {
+          "package_name": "isaacsilas05.gmail.com.synarcmusic1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476786347455-c802rd7mvd8g9if1va23c7iqgguhie0g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "isaacsilas05.gmail.com.synarcmusic1",
+            "certificate_hash": "b787b1e8f144c66db5c986e66a1c143b1301fe79"
+          }
+        },
+        {
+          "client_id": "476786347455-a43431o9n29tdhnavntogqk838s4pi6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgslL38nfdrfIG-PqLnl5R7cb7veEpxks"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476786347455-a43431o9n29tdhnavntogqk838s4pi6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
