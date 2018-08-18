@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/emailuser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passworduser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
@@ -65,20 +65,16 @@
         android:text="@string/sign_in"
         android:textColor="@color/white" />
 
-    <!-- Link to Login Screen -->
-
     <Button
         android:id="@+id/sign_up_button"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dip"
         android:background="@color/redMusic"
-        android:text="@string/sign_up"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:text="Sign Up"
+        android:textColor="@color/white" />
 
-    <!-- Link to Forget Password -->
+    <!-- Link to Login Screen -->
 
     <TextView
         android:id="@+id/forget_password_button"

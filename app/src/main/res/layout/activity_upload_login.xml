@@ -65,6 +65,15 @@
         android:text="@string/sign_in"
         android:textColor="@color/white" />
 
+    <Button
+        android:id="@+id/regis_in_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@color/redMusic"
+        android:text="Sign Up"
+        android:textColor="@color/white" />
+
     <!-- Link to Login Screen -->
 
     <TextView

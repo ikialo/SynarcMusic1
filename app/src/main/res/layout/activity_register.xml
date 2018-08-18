@@ -34,14 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/name"
+                    android:id="@+id/nameReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/redMusic" />
+                    android:textColor="@color/colorPrimary" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -49,28 +49,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/phone"
+                    android:id="@+id/phoneReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone"
                     android:inputType="phone"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/redMusic" />
+                    android:textColor="@color/colorPrimary" />
             </android.support.design.widget.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/dateofbirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date Of Birth"
+                    android:inputType="phone"
+                    android:textSize="18dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:text="Gender"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+               <Button
+                   android:id="@+id/male"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Male"
+                   android:layout_marginRight="30dp"
+                   android:background="@color/redMusic"/>
+                <Button
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:background="@color/redMusic"/>
+
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/emailReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/redMusic" />
+                    android:textColor="@color/colorPrimary" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -78,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/passwordReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
@@ -88,7 +130,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/redMusic"
+                    android:textColor="@color/colorPrimary"
                     tools:ignore="InvalidImeActionId" />
 
 
@@ -98,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/confirmPassword"
+                    android:id="@+id/confirmPasswordReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
@@ -114,28 +156,17 @@
 
 
             <Button
-                android:id="@+id/sign_up_button"
+                android:id="@+id/sign_up_buttonReg"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/redMusic"
                 android:text="Sign Up"
-                android:textColor="@color/white"
                 android:textStyle="bold" />
-
 
             <!-- Link to Login Screen -->
 
-
-            <Button
-                android:id="@+id/sign_in_button"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:background="@color/redMusic"
-                android:text="Sign In"
-                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 
