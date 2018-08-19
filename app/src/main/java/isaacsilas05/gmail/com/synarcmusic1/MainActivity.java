@@ -87,10 +87,6 @@ public class MainActivity extends AppCompatActivity {
                                     mDatabase.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            Toast.makeText(
-                                                    MainActivity.this,
-                                                    dataSnapshot.toString(),
-                                                    Toast.LENGTH_LONG).show();
                                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                                                 String child = postSnapshot.getKey();

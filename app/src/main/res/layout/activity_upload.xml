@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".UploadActivity">
 
-    <Button
-        android:id="@+id/choose_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" choose file "
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@color/redMusic"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/choose_file"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <EditText
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/choose_file"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/songName"
-            android:hint="Song Name"
-
+            android:text=" choose file "
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/redMusic"
+            android:layout_marginStart="10dp"
             />
-    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <EditText
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/songName"
+                android:hint="Song Name"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
 
 
     <ProgressBar
@@ -47,16 +49,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@id/choose_file"
          />
 
     <Button
         android:id="@+id/uploadSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/progressBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:text="upload song"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
@@ -79,7 +79,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewUpload"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textviewListsongs">
@@ -87,4 +87,4 @@
     </android.support.v7.widget.RecyclerView>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

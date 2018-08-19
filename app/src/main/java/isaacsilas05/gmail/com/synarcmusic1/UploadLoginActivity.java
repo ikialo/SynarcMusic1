@@ -71,12 +71,13 @@ public class UploadLoginActivity extends AppCompatActivity {
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                                                        String child = postSnapshot.getKey();
-                                                        if(child.equals(auth.getCurrentUser().getUid())){
+                                                       // String child = postSnapshot.getKey();
+                                                       // if(child.equals(auth.getCurrentUser().getUid())){
                                                             Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
                                                             intent.putExtra("uid", auth.getCurrentUser().getUid());
                                                             startActivity(intent);
-                                                        }
+                                                        //}
+
                                                     }
                                                 }
 

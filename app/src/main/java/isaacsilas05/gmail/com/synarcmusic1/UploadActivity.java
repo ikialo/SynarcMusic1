@@ -36,7 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadActivity extends AppCompatActivity {
+public class UploadActivity extends AppCompatActivity  implements AudioAdapterProducer.OnItemClickListener{
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -52,6 +52,7 @@ public class UploadActivity extends AppCompatActivity {
     private AudioAdapterProducer mAdapter;
     private ProgressBar mProgressCircle;
     private String UId;
+
 
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabase;
@@ -76,7 +77,11 @@ public class UploadActivity extends AppCompatActivity {
         mUploads = new ArrayList<>();
         mAdapter = new AudioAdapterProducer(UploadActivity.this, mUploads);
 
+
+
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(UploadActivity.this);
 
         // firebase  initialisation
         mDatabase = FirebaseDatabase.getInstance().getReference("Uploads");
@@ -98,6 +103,7 @@ public class UploadActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
+        uploadSong.setVisibility(View.INVISIBLE);
         chooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +118,7 @@ public class UploadActivity extends AppCompatActivity {
             }
         });
 
-        mDatabase.child(UId).addValueEventListener(new ValueEventListener() {
+        mDBL = mDatabase.child(UId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -137,6 +143,16 @@ public class UploadActivity extends AppCompatActivity {
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(UploadActivity.this, UploadLoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
     }
 
     private void chooseFileMethod() {
@@ -144,6 +160,7 @@ public class UploadActivity extends AppCompatActivity {
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,PICK_IMAGE_REQUEST);
+        uploadSong.setVisibility(View.VISIBLE);
     }
 
     private String getFileExtension(Uri uri){
@@ -205,6 +222,41 @@ public class UploadActivity extends AppCompatActivity {
             Toast.makeText(this,"no file", Toast.LENGTH_SHORT).show();
         }
     }
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onWhateverClick(int position) {
+        Toast.makeText(this, "Whatever Click at position: " + position, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        Toast.makeText(this, "Delete click at position: " + position, Toast.LENGTH_SHORT).show();
+        Upload SelectedItem = mUploads.get(position);
+
+        final String selectedKey = SelectedItem.getKey();
+
+        StorageReference imageref = mStorage.getReferenceFromUrl(SelectedItem.getImageUrl());
+        imageref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabase.child(UId).child(selectedKey).removeValue();
+                Toast.makeText(UploadActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mDatabase.removeEventListener(mDBL);
+    }
 }
+
+
+
