@@ -14,15 +14,14 @@
         <Button
             android:id="@+id/choose_file"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" choose file "
-            android:textColor="@color/white"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:background="@color/redMusic"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@color/redMusic"
-            android:layout_marginStart="10dp"
-            />
+            android:text=" choose file "
+            android:textColor="@color/white" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
@@ -39,6 +38,18 @@
 
                 />
         </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="37dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/redMusic"
+
+            android:text=" Log Out "
+            android:textColor="@color/white"
+            android:textSize="5dp" />
     </LinearLayout>
 
 
@@ -54,23 +65,24 @@
     <Button
         android:id="@+id/uploadSong"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="24dp"
         android:layout_gravity="center"
-        android:text="upload song"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:background="@color/redMusic"
-        android:textColor="@color/white"/>
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="upload song"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textviewListsongs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SONGS UPLOADED"
-        android:textSize="30sp"
+        android:textSize="10sp"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:gravity="left"
         app:layout_constraintBottom_toTopOf="@id/recyclerViewUpload"
         app:layout_constraintTop_toBottomOf="@id/uploadSong"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +91,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewUpload"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="270dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textviewListsongs">

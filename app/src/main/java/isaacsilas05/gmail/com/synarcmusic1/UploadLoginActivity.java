@@ -3,6 +3,7 @@ package isaacsilas05.gmail.com.synarcmusic1;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,13 @@ public class UploadLoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Button btnLogin;
     private ProgressDialog PD;
+    private  SharedPreferences sp,sp2;
+    private  SharedPreferences.Editor editor;
+
+    private static final String LOGIN = "login";
+    private static final String IDUSER= "user id";
+    private static final String LOGGED = "logged";
+    private static final String EMAIL = "email";
 
 
 
@@ -47,10 +55,36 @@ public class UploadLoginActivity extends AppCompatActivity {
         inputPassword =  findViewById(R.id.password);
         btnLogin = findViewById(R.id.sign_in_button);
 
+        sp = getSharedPreferences(LOGIN, MODE_PRIVATE);
+        sp2 = getSharedPreferences(LOGIN, MODE_PRIVATE);
+        editor =sp.edit();
+
+        String userid = sp2.getString(IDUSER,"");
+        String email = sp2.getString(EMAIL,"");
+
+        Toast.makeText(
+                UploadLoginActivity.this,
+                email,
+                Toast.LENGTH_LONG).show();
+
+        if (sp.getBoolean(LOGGED, false) &&  email.equals(auth.getCurrentUser().getEmail()) ){
+            Toast.makeText(
+                    UploadLoginActivity.this,
+                    auth.getCurrentUser().getEmail(),
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
+            intent.putExtra("uid", userid);
+            startActivity(intent);
+        }
+
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override            public void onClick(View view) {
                 final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
+
+
 
                 try {
 
@@ -62,21 +96,29 @@ public class UploadLoginActivity extends AppCompatActivity {
 
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    UploadLoginActivity.this,
-                                                    "Authentication Sucess",
-                                                    Toast.LENGTH_LONG).show();
+                                            sp.edit().putBoolean(LOGGED,true).apply();
+
                                             mDatabase.addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                                                       // String child = postSnapshot.getKey();
-                                                       // if(child.equals(auth.getCurrentUser().getUid())){
+                                                        String child = postSnapshot.getKey();
+                                                        if(child.equals(auth.getCurrentUser().getUid())){
+                                                            Toast.makeText(
+                                                                    UploadLoginActivity.this,
+                                                                    "Authentication Sucess",
+                                                                    Toast.LENGTH_LONG).show();
+
+                                                            editor.putString(IDUSER, auth.getCurrentUser().getUid() );
+                                                            editor.putString(EMAIL, email);
+                                                            editor.apply();
+
                                                             Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
                                                             intent.putExtra("uid", auth.getCurrentUser().getUid());
                                                             startActivity(intent);
-                                                        //}
+
+                                                        }
 
                                                     }
                                                 }
@@ -132,4 +174,14 @@ public class UploadLoginActivity extends AppCompatActivity {
         }
         super.onResume();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(UploadLoginActivity.this, FrontPageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
+    }
+
 }

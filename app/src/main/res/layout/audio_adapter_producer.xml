@@ -3,34 +3,43 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginBottom="20dp"
+
     android:layout_height="wrap_content">
 
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/uploadLinearLayout">
+        app:cardCornerRadius="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/nameSong"
-            android:gravity="center"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="song name"
-            />
-        <TextView
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/nameAlbum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="album name"
-            />
+            android:background="@color/cardviewcolor"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/uploadLinearLayout">
+
+            <TextView
+                android:id="@+id/nameSong"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="song name"
+                />
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/nameAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="album name"
+                />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 
 

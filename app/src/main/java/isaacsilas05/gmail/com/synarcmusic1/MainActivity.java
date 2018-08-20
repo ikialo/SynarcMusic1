@@ -80,10 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(
-                                            MainActivity.this,
-                                            "Authentication Sucess",
-                                            Toast.LENGTH_LONG).show();
+
                                     mDatabase.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -91,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
                                                 String child = postSnapshot.getKey();
                                                 if(child.equals(auth.getCurrentUser().getUid())){
+                                                    Toast.makeText(
+                                                            MainActivity.this,
+                                                            "Authentication Sucess",
+                                                            Toast.LENGTH_LONG).show();
                                                     Intent intent = new Intent(MainActivity.this, DownloadActivity.class);
                                                     //intent.putExtra("uid", auth.getCurrentUser().getUid());
                                                     startActivity(intent);

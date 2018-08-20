@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,8 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
     private RecyclerView mRecyclerView;
     private AudioAdapterProducer mAdapter;
     private ProgressBar mProgressCircle;
+    private Button logout;
+    private SharedPreferences sp;
     private String UId;
 
 
@@ -58,6 +61,9 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
     private DatabaseReference mDatabase;
     private ValueEventListener mDBL;
     private List<Upload> mUploads;
+
+    private static final String LOGIN = "login";
+    private static final String LOGGED = "logged";
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -67,6 +73,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
+        sp = getSharedPreferences(LOGIN, MODE_PRIVATE);
 
         //Recycler view set ups
         mRecyclerView = findViewById(R.id.recyclerViewUpload);
@@ -95,6 +102,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
 
 
         // links to user interface
+        logout = findViewById(R.id.logout);
         chooseFile = findViewById(R.id.choose_file);
         songName = findViewById(R.id.songName);
         uploadSong = findViewById(R.id.uploadSong);
@@ -103,18 +111,33 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
-        uploadSong.setVisibility(View.INVISIBLE);
+        uploadSong.setEnabled(false);
+        uploadSong.setBackgroundColor(0xFF9CCAB4);
         chooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseFileMethod();
+                uploadSong.setBackgroundColor(0xFF05db82);
+
             }
         });
 
+        // stop onscreen keybooard from poping up
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putBoolean(LOGGED,false).apply();
+                startActivity(new Intent(UploadActivity.this, UploadLoginActivity.class));
+            }
+        });
         uploadSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadFile();
+                uploadSong.setEnabled(false);
+                uploadSong.setBackgroundColor(0xFF9CCAB4);
             }
         });
 
@@ -149,7 +172,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(UploadActivity.this, UploadLoginActivity.class);
+        Intent i = new Intent(UploadActivity.this, FrontPageActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
@@ -160,7 +183,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,PICK_IMAGE_REQUEST);
-        uploadSong.setVisibility(View.VISIBLE);
+        uploadSong.setEnabled(true);
     }
 
     private String getFileExtension(Uri uri){

@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
-                        android.R.style.Theme_DeviceDefault_Light_DarkActionBar,
+                        android.R.style.Theme_Black_NoTitleBar_Fullscreen,
                         mOndatesetlistener,2000,1,1);
 
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
