@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@drawable/back"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
@@ -23,6 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:text="Register"
                 android:gravity="center"
                 android:textAllCaps="true"
@@ -37,7 +37,12 @@
                     android:id="@+id/nameReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:hint="Name"
+                    android:background="@drawable/tv_name"
+                    android:layout_marginBottom="2dp"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -53,6 +58,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:background="@drawable/tv_name"
+                    android:layout_marginBottom="2dp"
                     android:inputType="phone"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -66,6 +76,11 @@
                     android:id="@+id/dateofbirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:background="@drawable/tv_name"
+                    android:layout_marginBottom="2dp"
                     android:hint="Date Of Birth"
                     android:inputType="phone"
                     android:textSize="18dp"
@@ -86,6 +101,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -94,14 +110,15 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Male"
+
                    android:layout_marginRight="30dp"
-                   android:background="@color/redMusic"/>
+                   android:background="@drawable/button_front"/>
                 <Button
                     android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
-                    android:background="@color/redMusic"/>
+                    android:background="@drawable/button_front"/>
 
             </LinearLayout>
 
@@ -113,6 +130,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
+                    android:background="@drawable/tv_name"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:layout_marginBottom="2dp"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -127,12 +149,17 @@
                     android:id="@+id/passwordReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:focusableInTouchMode="true"
                     android:hint="Password"
                     android:imeActionId="@+id/login"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:background="@drawable/tv_name"
+                    android:layout_marginBottom="2dp"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary"
                     tools:ignore="InvalidImeActionId" />
@@ -149,9 +176,14 @@
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
                     android:hint="Confirm Password"
+                    android:background="@drawable/tv_name"
+                    android:layout_marginBottom="2dp"
                     android:imeActionId="@+id/login"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary"
@@ -165,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/redMusic"
+                android:background="@drawable/button_front"
                 android:text="Sign Up"
                 android:textStyle="bold" />
 

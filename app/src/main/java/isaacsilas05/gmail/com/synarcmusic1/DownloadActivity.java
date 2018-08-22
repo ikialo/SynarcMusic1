@@ -1,12 +1,16 @@
 package isaacsilas05.gmail.com.synarcmusic1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +39,10 @@ public class DownloadActivity extends AppCompatActivity {
     private List<Upload> mDownloads;
     private List<String> child;
 
+    private SharedPreferences sp;
+    private static final String LOGIN = "downloadsignedin";
+    private static final String EMAIL= "email";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,8 @@ public class DownloadActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Uploads");
         auth = FirebaseAuth.getInstance();
+
+        sp = getSharedPreferences(LOGIN, MODE_PRIVATE);
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -94,4 +104,42 @@ public class DownloadActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent i = new Intent(DownloadActivity.this, FrontPageActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.downloadmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.search_download:
+                Toast.makeText(DownloadActivity.this,
+                        " serach button pressed", Toast.LENGTH_SHORT).show();
+            case R.id.logout_download:
+                sp.edit().remove(EMAIL).apply();
+                startActivity(new Intent(DownloadActivity.this, MainActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+
+    }
 }
+
+

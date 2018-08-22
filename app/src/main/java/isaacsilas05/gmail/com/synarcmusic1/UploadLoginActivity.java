@@ -62,10 +62,6 @@ public class UploadLoginActivity extends AppCompatActivity {
         String userid = sp2.getString(IDUSER,"");
         String email = sp2.getString(EMAIL,"");
 
-        Toast.makeText(
-                UploadLoginActivity.this,
-                email,
-                Toast.LENGTH_LONG).show();
 
         if (sp.getBoolean(LOGGED, false) &&  email.equals(auth.getCurrentUser().getEmail()) ){
             Toast.makeText(

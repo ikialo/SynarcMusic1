@@ -8,7 +8,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
-    <color name="redMusic">#05db82</color>
+    <color name="tv_name_color">#e8f0e5</color>
+    <color name="redMusic">#05db1a</color>
     <color name="buttonpressed">#bdfb42</color>
     <color name="redMusictransparent">#ccc10000</color>
 </resources>

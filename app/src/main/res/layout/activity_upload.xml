@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/back"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".UploadActivity">
@@ -17,7 +18,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:background="@color/redMusic"
+            android:background="@drawable/button_front"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text=" choose file "
@@ -34,22 +35,15 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/songName"
+                android:padding="2dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/tv_name"
                 android:hint="Song Name"
 
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="37dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/redMusic"
 
-            android:text=" Log Out "
-            android:textColor="@color/white"
-            android:textSize="5dp" />
     </LinearLayout>
 
 
@@ -67,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_gravity="center"
-        android:background="@color/redMusic"
+        android:background="@drawable/button_front"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

@@ -21,14 +21,12 @@ import java.io.File;
 public class FrontPageActivity extends AppCompatActivity {
 
     Button mUpLoad, mDownload;
-    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mUpLoad = findViewById(R.id.upload);
         mDownload = findViewById(R.id.download);
         mUpLoad.setOnClickListener(new View.OnClickListener() {
@@ -44,14 +42,10 @@ public class FrontPageActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(FrontPageActivity.this,DownloadActivity.class);
+                Intent intent = new Intent(FrontPageActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
     }
-
-
-
-
 
 }

@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -64,6 +67,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
 
     private static final String LOGIN = "login";
     private static final String LOGGED = "logged";
+    private static final String EMAIL = "email";
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -101,8 +105,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         PD.setCanceledOnTouchOutside(false);
 
 
-        // links to user interface
-        logout = findViewById(R.id.logout);
+
         chooseFile = findViewById(R.id.choose_file);
         songName = findViewById(R.id.songName);
         uploadSong = findViewById(R.id.uploadSong);
@@ -125,13 +128,6 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         // stop onscreen keybooard from poping up
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sp.edit().putBoolean(LOGGED,false).apply();
-                startActivity(new Intent(UploadActivity.this, UploadLoginActivity.class));
-            }
-        });
         uploadSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +202,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
     private void uploadFile(){
         PD.show();
         if(mAudioUri != null){
-            StorageReference fileRef = mStorageRef.child(songName.getText()
+            StorageReference fileRef = mStorageRef.child(songName.getText().toString().trim()
                     + "."+ getFileExtension(mAudioUri));
 
             mUploadTask = fileRef.putFile(mAudioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -278,6 +274,29 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         super.onDestroy();
 
         mDatabase.removeEventListener(mDBL);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menuupload, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.logout_upload:
+                sp.edit().putBoolean(LOGGED,false).apply();
+                sp.edit().remove(EMAIL);
+                startActivity(new Intent(UploadActivity.this, UploadLoginActivity.class));
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+
     }
 }
 

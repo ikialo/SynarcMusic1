@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/cardviewcolor"
+            android:background="@drawable/button_front"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/uploadLinearLayout">
