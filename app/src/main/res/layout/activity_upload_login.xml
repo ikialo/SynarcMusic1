@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/back"
+    android:background="@drawable/backwithlogo"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
@@ -73,14 +73,7 @@
         android:text="@string/sign_in"
         android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/regis_in_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="@drawable/button_front"
-        android:text="Sign Up"
-        android:textColor="@color/white" />
+
 
     <!-- Link to Login Screen -->
 

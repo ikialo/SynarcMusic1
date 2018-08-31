@@ -2,14 +2,16 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="cardviewcolor">#39F33E</color>
+    <color name="greenmusic">#067a09</color>
     <color name="cardviewcolorcard">#e2f1e3</color>
     <color name="border">#014f06</color>
     <color name="inactive">#9ccab4</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
-    <color name="tv_name_color">#e8f0e5</color>
+    <color name="tv_name_color">#cce8f0e5</color>
     <color name="redMusic">#05db1a</color>
+    <color name="buttongreen">#cc05db1a</color>
     <color name="buttonpressed">#bdfb42</color>
     <color name="redMusictransparent">#ccc10000</color>
 </resources>

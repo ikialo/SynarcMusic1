@@ -6,4 +6,6 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="login">LOGIN</string>
+    <string name="song_name">song name</string>
+    <string name="album_name">album name</string>
 </resources>

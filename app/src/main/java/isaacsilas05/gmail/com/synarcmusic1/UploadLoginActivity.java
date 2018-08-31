@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,7 @@ public class UploadLoginActivity extends AppCompatActivity {
     private static final String LOGGED = "logged";
     private static final String EMAIL = "email";
 
+    private Boolean check;
 
 
     @Override    protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +82,24 @@ public class UploadLoginActivity extends AppCompatActivity {
                 final String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
+                auth.fetchProvidersForEmail(email).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
+                        // not check means there is an existin email
+                        check  = task.getResult().getProviders().isEmpty();
 
+                        if (check){
+                            Toast.makeText(
+                                    UploadLoginActivity.this,
+                                    "User doesnt exist",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
                 try {
 
-                    if (password.length() > 0 && email.length() > 0) {
+                    if (password.length() > 0 && email.length() > 0 && !check) {
                         PD.show();
                         auth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(UploadLoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -110,15 +125,19 @@ public class UploadLoginActivity extends AppCompatActivity {
                                                             editor.putString(EMAIL, email);
                                                             editor.apply();
 
-                                                            Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
-                                                            intent.putExtra("uid", auth.getCurrentUser().getUid());
-                                                            startActivity(intent);
-
+//                                                            Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
+//                                                            intent.putExtra("uid", auth.getCurrentUser().getUid());
+//                                                            startActivity(intent);
                                                         }
-
                                                     }
-                                                }
 
+                                                    Intent intent = new Intent(UploadLoginActivity.this, UploadActivity.class);
+                                                    intent.putExtra("uid", auth.getCurrentUser().getUid());
+                                                    startActivity(intent);
+
+
+
+                                                }
                                                 @Override
                                                 public void onCancelled(DatabaseError databaseError) {
 
@@ -127,13 +146,12 @@ public class UploadLoginActivity extends AppCompatActivity {
 
 
 
-                                            Log.v("error", task.getResult().toString());
                                         } else {
                                             Toast.makeText(
                                                     UploadLoginActivity.this,
                                                     "Authentication Fail",
                                                     Toast.LENGTH_LONG).show();
-
+                                            Log.v("error", task.getResult().toString());
 
                                             //finish();
                                         }

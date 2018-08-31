@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnSignUp, male, female;
     private String UID;
     private String gender;
-    private boolean check;
+    private boolean check = true;
     private ProgressDialog PD;
     private DatePickerDialog.OnDateSetListener mOndatesetlistener;
 

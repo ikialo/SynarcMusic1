@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item >
+        <shape>
+            <solid android:color="@color/tv_name_color">
+            </solid>
+            <corners android:radius="30dp">
+            </corners>
+            <size android:width="30dp" android:height="10dp">
+            </size>
+
+        </shape>
+    </item>
+</selector>
