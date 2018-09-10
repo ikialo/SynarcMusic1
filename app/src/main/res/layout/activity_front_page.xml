@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/back"
+    android:background="@drawable/backwithlogo"
     tools:context=".FrontPageActivity">
 
 
@@ -14,17 +14,13 @@
     <Button
         android:id="@+id/upload"
         android:layout_width="match_parent"
-        android:text="upload"
+        android:text="Sign in"
         android:background="@drawable/button_front"
         android:layout_marginTop="150dp"
+        android:layout_marginStart="30dp"
+        android:textSize="50dp"
+        android:fontFamily="casual"
+        android:layout_marginEnd="30dp"
         android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/download"
-        android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/button_front"
-        android:layout_height="wrap_content"
-        android:text="download"/>
 
 </LinearLayout>

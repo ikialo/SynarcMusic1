@@ -20,6 +20,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,9 +43,12 @@ public class DownloadActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private AdapterAudioDownload mAdapter;
     private RecyclerView mRecyclerView;
+    private TextView username;
+    int extraSend;
 
     private List<Upload> mDownloads;
     private List<String> child;
+    final static private String ArtistUpDownToken = "artist token";
 
     private SharedPreferences sp;
     private static final String LOGIN = "downloadsignedin";
@@ -57,7 +63,10 @@ public class DownloadActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerViewUpload);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        username = findViewById(R.id.usernamer);
 
+        Intent intent = getIntent();
+        extraSend = intent.getIntExtra(ArtistUpDownToken,0);
         mDownloads = new ArrayList<>();
         mAdapter = new AdapterAudioDownload(DownloadActivity.this, mDownloads);
 
@@ -65,6 +74,8 @@ public class DownloadActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Uploads");
         auth = FirebaseAuth.getInstance();
+
+        username.setText(auth.getCurrentUser().getDisplayName());
 
         sp = getSharedPreferences(LOGIN, MODE_PRIVATE);
 
@@ -92,7 +103,8 @@ public class DownloadActivity extends AppCompatActivity {
                                 Upload upload;
                                 String name = postSnapshot.child("name").getValue().toString();
                                 String url = postSnapshot.child("imageUrl").getValue().toString();
-                                upload = new Upload(name,url);
+                                String username = postSnapshot.child("username").getValue().toString();
+                                upload = new Upload(name,url,username);
 
                                 upload.setKey(postSnapshot.getKey());
                                 mDownloads.add(upload);
@@ -120,10 +132,15 @@ public class DownloadActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent i = new Intent(DownloadActivity.this, FrontPageActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-        finish();
+        if ( extraSend == 1) {
+            Intent i = new Intent(DownloadActivity.this, ArtistUploadDownloadActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }else {
+            Intent intent = new Intent(DownloadActivity.this,FrontPageActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -143,8 +160,17 @@ public class DownloadActivity extends AppCompatActivity {
                 Toast.makeText(DownloadActivity.this,
                         " serach button pressed", Toast.LENGTH_SHORT).show();
             case R.id.logout_download:
-                sp.edit().remove(EMAIL).apply();
-                startActivity(new Intent(DownloadActivity.this, MainActivity.class));
+                AuthUI.getInstance()
+                        .signOut(DownloadActivity.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // ...
+
+                                Toast.makeText(DownloadActivity.this, "user logged OUT successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                startActivity(new Intent(DownloadActivity.this, FrontPageActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -184,7 +210,7 @@ public class DownloadActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
     }

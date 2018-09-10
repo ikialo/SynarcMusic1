@@ -23,8 +23,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -97,6 +100,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         // firebase  initialisation
         mDatabase = FirebaseDatabase.getInstance().getReference("Uploads");
         mStorage = FirebaseStorage.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         // Progress Dialog set in
         PD = new ProgressDialog(this);
@@ -110,7 +114,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         songName = findViewById(R.id.songName);
         uploadSong = findViewById(R.id.uploadSong);
         progressBar = findViewById(R.id.progressBar);
-        UId = getIntent().getExtras().get("uid").toString();
+        UId = auth.getCurrentUser().getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
@@ -146,7 +150,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
                     Upload upload;
                     String name = postSnapshot.child("name").getValue().toString();
                     String url = postSnapshot.child("imageUrl").getValue().toString();
-                    upload = new Upload(name,url);
+                    upload = new Upload(name,url, auth.getCurrentUser().getDisplayName());
 
                     upload.setKey(postSnapshot.getKey());
                     mUploads.add(upload);
@@ -159,16 +163,17 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(UploadActivity.this,databaseError.getMessage(),Toast.LENGTH_SHORT).show();
-                mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+
+
 
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(UploadActivity.this, FrontPageActivity.class);
+        Intent i = new Intent(UploadActivity.this, ArtistUploadDownloadActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
@@ -196,13 +201,14 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
                 && data.getData()!= null){
             mAudioUri = data.getData();
 
+
             //mImageView.setImageURI(mImageUri);
         }
     }
     private void uploadFile(){
         PD.show();
         if(mAudioUri != null){
-            StorageReference fileRef = mStorageRef.child(songName.getText().toString().trim()
+            final StorageReference fileRef = mStorageRef.child(songName.getText().toString().trim()
                     + "."+ getFileExtension(mAudioUri));
 
             mUploadTask = fileRef.putFile(mAudioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -218,7 +224,7 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
 
                     Toast.makeText(UploadActivity.this,"Upload Successful", Toast.LENGTH_SHORT).show();
                     Upload upload = new Upload(songName.getText().toString().trim(),
-                            taskSnapshot.getDownloadUrl().toString());
+                            fileRef.getDownloadUrl().toString(), auth.getCurrentUser().getDisplayName());
 
                     String uploadId = mDatabaseRef.push().getKey();
                     mDatabaseRef.child(UId).child(uploadId).setValue(upload);
@@ -269,12 +275,12 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        mDatabase.removeEventListener(mDBL);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//
+//        mDatabase.removeEventListener(mDBL);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -288,15 +294,20 @@ public class UploadActivity extends AppCompatActivity  implements AudioAdapterPr
 
         switch (item.getItemId()){
             case R.id.logout_upload:
-                sp.edit().putBoolean(LOGGED,false).apply();
-                sp.edit().remove(EMAIL);
-                startActivity(new Intent(UploadActivity.this, UploadLoginActivity.class));
+                AuthUI.getInstance()
+                        .signOut(UploadActivity.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // ...
+
+                                Toast.makeText(UploadActivity.this, "user logged OUT successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                startActivity(new Intent(UploadActivity.this, FrontPageActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
-
     }
 }
 

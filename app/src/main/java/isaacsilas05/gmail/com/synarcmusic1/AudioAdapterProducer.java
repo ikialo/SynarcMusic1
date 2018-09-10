@@ -39,7 +39,7 @@ public class AudioAdapterProducer extends RecyclerView.Adapter <AudioAdapterProd
     public void onBindViewHolder(@NonNull AudioViewHolder audioViewHolder, int i) {
         final Upload uploadCurrent = mUploads.get(i);
         audioViewHolder.nameSong.setText(uploadCurrent.getName());
-        audioViewHolder.nameAlbum.setText(uploadCurrent.getName());
+        audioViewHolder.nameAlbum.setText(uploadCurrent.getUsername());
 
     }
 

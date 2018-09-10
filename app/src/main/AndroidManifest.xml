@@ -9,16 +9,14 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_synarc"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_synarc_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FrontPageActivity"
+        <activity
+            android:name=".FrontPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,20 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".UploadLoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".UploadActivity"
+        <activity
+            android:name=".UploadActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".DownloadLoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DownloadActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".DownloadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ArtistUploadDownloadActivity"
+            android:label="@string/title_activity_artist_upload_download" />
     </application>
 
 </manifest>
