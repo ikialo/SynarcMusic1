@@ -6,18 +6,27 @@ public class Upload {
     private String mName;
     private String mImageUrl;
     private String mKey;
+    private String mUsername;
 
     public Upload() {
         //empty constructor needed
     }
 
-    public Upload(String name, String imageUrl) {
+    public Upload(String name, String imageUrl, String username) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
-
+        mUsername = username;
         mName = name;
         mImageUrl = imageUrl;
+    }
+
+    public String getUsername() {
+        return mUsername;
+    }
+
+    public void setUsername(String mUsername) {
+        this.mUsername = mUsername;
     }
 
     public String getName() {
