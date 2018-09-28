@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/tv_name"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/google_play_services_version"
+                android:background="@drawable/button_front"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameSongdl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/song_name"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/nameAlbumdl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/album_name" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/downloadbutton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/download_two" />
+
+        </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarDownloads"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        />
+
+</LinearLayout>

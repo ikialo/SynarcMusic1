@@ -6,4 +6,9 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="login">LOGIN</string>
+    <string name="song_name">song name</string>
+    <string name="album_name">album name</string>
+    <string name="facebook_application_id" translatable="false">2174110642668129</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb2174110642668129</string>
+    <string name="title_activity_artist_upload_download">ArtistUploadDownloadActivity</string>
 </resources>

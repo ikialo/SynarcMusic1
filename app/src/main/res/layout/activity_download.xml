@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backwithlogo"
+    android:layout_height="match_parent"
+    tools:context=".DownloadActivity">
+
+
+    <TextView
+        android:id="@+id/usernamer"
+        android:text="Name"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textviewListsongsdl"
+        android:text="LIST OF SONGS"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewUpload"
+        android:layout_width="match_parent"
+        android:layout_height="445dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textviewListsongsdl">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
